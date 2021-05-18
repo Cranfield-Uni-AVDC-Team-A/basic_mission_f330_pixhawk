@@ -7,7 +7,7 @@ UAV_MASS=0.7
 
 MAV_NAME=f330_pixhawk
 
-export AEROSTACK_PROJECT=${AEROSTACK_STACK}/projects_test/f330_pixhawk
+export AEROSTACK_PROJECT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 . ${AEROSTACK_STACK}/config/mission/setup.sh
 
 
