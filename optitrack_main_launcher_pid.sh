@@ -8,17 +8,6 @@ UAV_MASS=0.7
 MAV_NAME=f330_pixhawk
 
 export AEROSTACK_PROJECT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-. ${AEROSTACK_STACK}/config/mission/setup.sh
-
-# if [ -z $NETWORK_ROSCORE ] # Check if NETWORK_ROSCORE is NULL
-#   then
-#       #Argument 2 is empty
-# 	  . ${AEROSTACK_PROJECT}/setup.sh
-#   else
-#     . ${AEROSTACK_PROJECT}/setup.sh NETWORK_ROSCORE
-# fi
-
-# Kill any previous session (-t -> target session, -a -> all other sessions )
 
 tmux kill-session -t $SESSION
 tmux kill-session -a
@@ -57,19 +46,14 @@ tmux send-keys "roslaunch quadrotor_motion_with_pid_control quadrotor_motion_wit
     robot_config_path:=${AEROSTACK_PROJECT}/configs/drone$NUMID_DRONE \
     uav_mass:=$UAV_MASS" C-m
 
-tmux new-window -t $SESSION:5 -n 'Realsense T265 State Estimation'
-tmux send-keys "roslaunch realsense_t265_interface realsense_t265_interface.launch --wait \
+tmux new-window -t $SESSION:5 -n 'optitrack State Estimation'
+tmux send-keys "roslaunch optitrack_interface optitrack_interface.launch --wait \
 namespace:=drone$NUMID_DRONE" C-m
 
 tmux new-window -t $SESSION:6 -n 'Throttle_Controller'
 tmux send-keys "roslaunch thrust2throttle_controller thrust2throttle_controller.launch --wait \
   namespace:=drone$NUMID_DRONE \
   uav_mass:=$UAV_MASS" C-m
-
-#tmux new-window -t $SESSION:9 -n 'Calling services'
-#tmux send-keys "sleep 10; \
-#  rosservice call /drone1/quadrotor_motion_with_pid_control/behavior_quadrotor_pid_motion_control/activate_behavior \"timeout: 10000\" & \
-#  rosservice call /drone1/quadrotor_motion_with_pid_control/behavior_quadrotor_pid_thrust_control/activate_behavior \"timeout: 10000\"" C-m
 
 tmux new-window -t $SESSION:7 -n 'Python interpreter'
 tmux send-keys "roslaunch python_based_mission_interpreter_process python_based_mission_interpreter_process.launch --wait \

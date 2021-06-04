@@ -53,6 +53,11 @@ repositories:
     url: https://bitbucket.org/visionaerialrobotics/realsense_cameras_interface/
     version: master
   
+  hardware_interface/optitrack_interface:
+    type: git 
+    url: https://github.com/aerostack/optitrack_interface
+    version: master
+
 
 #----------------------------------------------------------------------------
 # User interface
