@@ -48,6 +48,12 @@ repositories:
     url: https://github.com/aerostack/pixhawk_interface
     version: master
 
+  hardware_interface/realsense_cameras_interface:
+    type: git 
+    url: https://bitbucket.org/visionaerialrobotics/realsense_cameras_interface/
+    version: master
+  
+
 #----------------------------------------------------------------------------
 # User interface
 #----------------------------------------------------------------------------
