@@ -4,9 +4,9 @@ This application illustrates a real world mission. The mission is created for th
 
 A source of localization is also required, we provide the project with two ways of localization for which all the required functionalities are included:
 
--  Intel® RealSense™ Tracking Camera T265. Buy link is: https://www.intelrealsense.com/tracking-camera-t265/
+-  Intel® RealSense™ Tracking Camera T265. Store link is: https://www.intelrealsense.com/tracking-camera-t265/
 
-- Optitrack. Buy link is: https://optitrack.com/systems/
+- Optitrack. Store link is: https://optitrack.com/systems/
 
 In order to execute the project you must execute the following commands in the onboard computer:
 
