@@ -12,12 +12,13 @@ def mission():
   print("Starting mission...")
 
   print("Taking off...")
-  mxc.executeTask('TAKE_OFF')
+  mxc.executeTask('TAKE_OFF_WITH_DF')
 
-  print("FOLLOW_PATH...")
-  mxc.executeTask('FOLLOW_PATH', path = [ [1, -1, 1] , [1, 1, 1] , [-1, 1, 1] , [-1, -1, 1], [0, 0, 1] ])
+  #print("FOLLOW_PATH...")
+  mxc.startTask('FOLLOW_PATH_WITH_DF')
+  # time.sleep(1)
+  #print("SEND PATH...")
+  # mxc.startTask('SEND_PATH', path = [ [1, 1, 1],[1, -1, 1],[-1, -1, 1],[-1, 1, 1],[0 ,0 ,1.5]])
 
-  print("Landing...")
-  mxc.executeTask('LAND')
 
   print('Finish mission...')

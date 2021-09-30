@@ -11,9 +11,9 @@ repositories:
 #----------------------------------------------------------------------------
 # Behaviors
 #----------------------------------------------------------------------------
-  behaviors/quadrotor_motion_with_pid_control:
+  behaviors/quadrotor_motion_with_df_control:
     type: git 
-    url: https://github.com/aerostack/quadrotor_motion_with_pid_control
+    url: https://github.com/aerostack/quadrotor_motion_with_df_control
     version: master
   behaviors/basic_quadrotor_behaviors:
     type: git 
@@ -57,7 +57,6 @@ repositories:
     type: git 
     url: https://github.com/aerostack/optitrack_interface
     version: master
-
 
 #----------------------------------------------------------------------------
 # User interface

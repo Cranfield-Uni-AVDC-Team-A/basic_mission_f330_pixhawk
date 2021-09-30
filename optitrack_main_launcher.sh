@@ -3,15 +3,15 @@
 NUMID_DRONE=1
 NETWORK_ROSCORE=$1
 SESSION=$USER
-UAV_MASS=0.7
+UAV_MASS=1.2
 
 MAV_NAME=f330_pixhawk
 
 export AEROSTACK_PROJECT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+# Kill any previous session (-t -> target session, -a -> all other sessions )
 tmux kill-session -t $SESSION
 tmux kill-session -a
-
 
 # Create new session  (-2 allows 256 colors in the terminal, -s -> session name, -d -> not attach to the new session)
 tmux -2 new-session -d -s $SESSION
@@ -34,19 +34,18 @@ tmux send-keys  "sleep 1;roslaunch keyboard_teleoperation_with_pid_control keybo
             
 tmux new-window -t $SESSION:2 -n 'pixhawk interface'
 tmux send-keys "roslaunch pixhawk_interface pixhawk_interface.launch \
---wait drone_id_namespace:=drone$NUMID_DRONE  acro_mode:=false simulation_mode:=false" C-m
+--wait drone_id_namespace:=drone$NUMID_DRONE  acro_mode:=true simulation_mode:=false" C-m
 
 tmux new-window -t $SESSION:3 -n 'Basic Quadrotor Behaviors'
 tmux send-keys "roslaunch basic_quadrotor_behaviors basic_quadrotor_behaviors.launch --wait \
   namespace:=drone$NUMID_DRONE" C-m
 
-tmux new-window -t $SESSION:4 -n 'Quadrotor Motion With PID Control'
-tmux send-keys "roslaunch quadrotor_motion_with_pid_control quadrotor_motion_with_pid_control.launch --wait \
+tmux new-window -t $SESSION:4 -n 'Quadrotor Motion With DF Control'
+tmux send-keys "roslaunch quadrotor_motion_with_df_control quadrotor_motion_with_df_control.launch --wait \
     namespace:=drone$NUMID_DRONE \
-    robot_config_path:=${AEROSTACK_PROJECT}/configs/drone$NUMID_DRONE \
     uav_mass:=$UAV_MASS" C-m
 
-tmux new-window -t $SESSION:5 -n 'optitrack State Estimation'
+tmux new-window -t $SESSION:5 -n 'Opitrack Estimation'
 tmux send-keys "roslaunch optitrack_interface optitrack_interface.launch --wait \
 namespace:=drone$NUMID_DRONE" C-m
 
